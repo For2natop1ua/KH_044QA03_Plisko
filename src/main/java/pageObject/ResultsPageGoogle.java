@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ResultsPageGoogle extends BasePage {
 
-    By searchResults = By.cssSelector("#res h3");
+    By searchResults = By.cssSelector("#rso a h3");
 
     public ResultsPageGoogle(WebDriver driver) {
         this.driver = driver;
