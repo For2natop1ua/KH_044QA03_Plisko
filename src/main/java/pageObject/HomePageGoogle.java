@@ -15,13 +15,7 @@ public class HomePageGoogle extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public HomePageGoogle openPage() {
-        driver.get("https://www.google.com/");
-        return this;
-    }
-
     public ResultsPageGoogle goToResultsPage() {
-        searchField.click();
         searchField.clear();
         searchField.sendKeys("rozetka");
         searchField.submit();

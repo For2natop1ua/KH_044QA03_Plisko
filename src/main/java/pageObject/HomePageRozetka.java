@@ -18,14 +18,7 @@ public class HomePageRozetka extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public HomePageRozetka verifyLink(){
-        String currentURL = driver.getCurrentUrl();
-        Assert.assertEquals(currentURL, "https://rozetka.com.ua/");
-        return this;
-    }
-
     public ResultsPageRozetka goToResultsPage() {
-        searchFieldRozetka.click();
         searchFieldRozetka.clear();
         searchFieldRozetka.sendKeys("book");
         searchButtonSubmit.click();
