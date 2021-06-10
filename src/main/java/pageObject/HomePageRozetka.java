@@ -12,13 +12,23 @@ public class HomePageRozetka extends BasePage {
     private WebElement searchFieldRozetka;
     @FindBy(css = "button.search-form__submit")
     private WebElement searchButtonSubmit;
+    @FindBy(css = "button.menu__toggle")
+    private WebElement catalog;
+    @FindBy(xpath = "//a[@href='https://hard.rozetka.com.ua/monitors/c80089/']")
+    private WebElement displaySection;
 
     public HomePageRozetka(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    public ResultsPageRozetka chooseFromCatalog() {
+        catalog.click();
+        displaySection.click();
+        return new ResultsPageRozetka(driver);
+    }
 
     public ResultsPageRozetka goToResultsPage() {
+        searchFieldRozetka.click();
         searchFieldRozetka.clear();
         searchFieldRozetka.sendKeys("book");
         searchButtonSubmit.click();
