@@ -7,7 +7,6 @@ public class AddingToCartTest extends BasePage {
 
     @Test
     public void addProductToCart() {
-
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka.goToResultsPage();
         ResultsPageRozetka resultsPageRozetka = new ResultsPageRozetka(driver);

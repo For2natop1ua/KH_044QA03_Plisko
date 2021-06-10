@@ -7,7 +7,6 @@ public class ProductSearchTest extends BasePage {
 
     @Test
     public void searchProduct() {
-
         String currentURL = driver.getCurrentUrl();
         Assert.assertEquals(currentURL, "https://rozetka.com.ua/");
 

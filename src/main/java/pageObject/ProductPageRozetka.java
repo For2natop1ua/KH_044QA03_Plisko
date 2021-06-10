@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ProductPageRozetka extends BasePage {
+
     @FindBy(css = "div.layout_with_sidebar")
     private WebElement resultsGrid;
     @FindBy(xpath = "a.goods-tile__picture")

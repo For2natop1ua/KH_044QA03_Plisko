@@ -6,7 +6,6 @@ public class OpenFirstMonitorTest extends BasePage {
 
     @Test
     public void sellerFilterTest() {
-
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka.chooseFromCatalog()
                 .chooseSeller()

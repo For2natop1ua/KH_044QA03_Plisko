@@ -19,7 +19,8 @@ import java.time.LocalDate;
 import static com.sun.deploy.cache.Cache.copyFile;
 
 public class BasePage {
-    public WebDriver driver;
+
+    protected WebDriver driver;
 
     public void waitForClickable(WebElement element) {
         WebDriverWait pageLoading = new WebDriverWait(driver, 5);
