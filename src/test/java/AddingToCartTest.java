@@ -1,9 +1,8 @@
 import org.testng.annotations.Test;
-import pageObject.BasePage;
 import pageObject.HomePageRozetka;
 import pageObject.ResultsPageRozetka;
 
-public class AddingToCartTest extends BasePage {
+public class AddingToCartTest extends BaseTest {
 
     @Test
     public void addProductToCart() {

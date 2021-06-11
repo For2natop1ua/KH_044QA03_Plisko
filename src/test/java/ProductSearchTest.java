@@ -1,9 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObject.BasePage;
 import pageObject.HomePageRozetka;
 
-public class ProductSearchTest extends BasePage {
+public class ProductSearchTest extends BaseTest {
 
     @Test
     public void searchProduct() {
