@@ -27,7 +27,6 @@ public class HomePageRozetka extends BasePage {
     }
 
     public ResultsPageRozetka goToResultsPage() {
-        searchFieldRozetka.click();
         searchFieldRozetka.clear();
         searchFieldRozetka.sendKeys("book");
         searchButtonSubmit.click();
