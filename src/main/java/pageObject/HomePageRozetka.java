@@ -15,6 +15,8 @@ public class HomePageRozetka extends BasePage {
     private WebElement catalog;
     @FindBy(xpath = "//a[@href='https://hard.rozetka.com.ua/monitors/c80089/']")
     private WebElement displaySection;
+    @FindBy(css = ".main-auth__button")
+    private WebElement authButton;
 
     public HomePageRozetka(WebDriver driver) {
         this.driver = driver;
@@ -31,5 +33,11 @@ public class HomePageRozetka extends BasePage {
         searchFieldRozetka.sendKeys("book");
         searchButtonSubmit.click();
         return new ResultsPageRozetka(driver);
+    }
+
+    public LoginPageRozetka goToLoginPage(){
+        waitForClickable(authButton);
+        authButton.click();
+        return new LoginPageRozetka(driver);
     }
 }

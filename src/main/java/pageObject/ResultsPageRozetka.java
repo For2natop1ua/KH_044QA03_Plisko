@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -20,6 +21,16 @@ public class ResultsPageRozetka extends BasePage {
     private WebElement catalogSettings;
     @FindBy(css = "rz-lazy.app-footer")
     private WebElement footer;
+    @FindBy(css = ".catalog-settings__sorting")
+    private WebElement sort;
+    @FindBy(css = ".promo-label_type_novelty")
+    private WebElement novelty;
+    @FindBy(css = ".promo-label_type_popularity")
+    private WebElement popularity;
+    @FindBy(css=".promo-label_type_action")
+    private WebElement action;
+    String prices = "//span[@class='goods-tile__price-value']";
+
 
     public ResultsPageRozetka(WebDriver driver) {
         this.driver = driver;
@@ -36,6 +47,7 @@ public class ResultsPageRozetka extends BasePage {
     public ResultsPageRozetka chooseSeller(){
         rozetkaSeller.click();
         waitForVisibility(catalogSettings);
+
         return this;
     }
 
@@ -43,5 +55,72 @@ public class ResultsPageRozetka extends BasePage {
         List<WebElement> results = driver.findElements(searchResults);
         results.get(0).click();
         return new ProductPageRozetka(driver);
+    }
+
+    public ResultsPageRozetka settingsSort(String value){
+        sort.click();
+        WebElement listBox = driver.findElement(By.xpath("//select"));
+        Select select = new Select(listBox);
+        select.selectByValue(value);
+        this.sleep(1);
+        return this;
+    }
+
+    public void checkPricesAsc() {
+        List<WebElement> pricesList = driver.findElements(By.xpath(prices));
+        int[] arr = integerValues(pricesList);
+        for(int i = 0; i<arr.length-1; i++){
+            if(!(arr[i]<=arr[i+1])) {
+                try {
+                    throw new Exception("Not ascending!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void checkPricesDesc()  {
+        List<WebElement> pricesList = driver.findElements(By.xpath(prices));
+        int[] arr = integerValues(pricesList);
+        for(int i = 0; i<arr.length-1; i++){
+            if(!(arr[i]>=arr[i+1])) {
+                try {
+                    throw new Exception("Not descending!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void checkNovelty(){
+        if(!novelty.isDisplayed()){
+            try {
+                throw new Exception("No new products!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void checkPopularity(){
+        if(!popularity.isDisplayed()){
+            try {
+                throw new Exception("No popular products!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void checkAction(){
+        if(!action.isDisplayed()){
+            try {
+                throw new Exception("No action products!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
