@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ResultsPageRozetka extends BasePage {
 
@@ -58,6 +59,7 @@ public class ResultsPageRozetka extends BasePage {
     }
 
     public ResultsPageRozetka settingsSort(String value){
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         sort.click();
         WebElement listBox = driver.findElement(By.xpath("//select"));
         Select select = new Select(listBox);
