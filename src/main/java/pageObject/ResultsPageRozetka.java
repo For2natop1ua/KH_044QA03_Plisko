@@ -33,7 +33,7 @@ public class ResultsPageRozetka extends BasePage {
         return new ResultsPageGoogle(driver);
     }
 
-    public ResultsPageRozetka chooseSeller(){
+    public ResultsPageRozetka chooseSellerRozetka(){
         rozetkaSeller.click();
         waitForVisibility(catalogSettings);
         return this;

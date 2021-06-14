@@ -20,7 +20,7 @@ public class HomePageRozetka extends BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    public ResultsPageRozetka chooseFromCatalog() {
+    public ResultsPageRozetka chooseMonitorFromCatalog() {
         catalog.click();
         displaySection.click();
         return new ResultsPageRozetka(driver);
