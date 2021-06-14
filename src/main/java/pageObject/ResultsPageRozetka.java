@@ -59,7 +59,6 @@ public class ResultsPageRozetka extends BasePage {
     }
 
     public ResultsPageRozetka settingsSort(String value){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         sort.click();
         WebElement listBox = driver.findElement(By.xpath("//select"));
         Select select = new Select(listBox);
