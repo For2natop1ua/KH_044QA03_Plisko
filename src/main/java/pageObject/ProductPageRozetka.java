@@ -28,9 +28,8 @@ public class ProductPageRozetka extends BasePage {
     }
 
     public CheckoutPage clickToCheckout() {
-        Actions actions = new Actions(driver);
         waitForClickable(buyButton);
-        actions.moveToElement(buyButton).perform();
+        newAction().moveToElement(buyButton).perform();
         buyButton.click();
         waitForClickable(acceptButton);
         acceptButton.click();

@@ -38,7 +38,7 @@ public class BaseTest {
     public void openRozetkaFromGoogle(){
         HomePageGoogle homePageGoogle = new HomePageGoogle(driver);
         homePageGoogle
-                .goToResultsPage()
+                .toGoogleRozetka()
                 .clickFirstResult();
     }
 
@@ -52,6 +52,9 @@ public class BaseTest {
             } catch (
                     IOException e) {
                 e.printStackTrace();
+            }
+            finally {
+                driver.quit();
             }
         }
         driver.quit();

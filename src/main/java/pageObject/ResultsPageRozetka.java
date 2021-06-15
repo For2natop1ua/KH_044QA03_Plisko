@@ -1,15 +1,14 @@
 package pageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ResultsPageRozetka extends BasePage {
 
@@ -28,8 +27,10 @@ public class ResultsPageRozetka extends BasePage {
     private WebElement novelty;
     @FindBy(css = ".promo-label_type_popularity")
     private WebElement popularity;
-    @FindBy(css=".promo-label_type_action")
+    @FindBy(css = ".promo-label_type_action")
     private WebElement action;
+    @FindBy (css = ".catalog-grid.ng-star-inserted")
+    private WebElement catalog;
     String prices = "//span[@class='goods-tile__price-value']";
 
 
@@ -40,15 +41,13 @@ public class ResultsPageRozetka extends BasePage {
     }
 
     public ResultsPageGoogle moveToFooter() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(footer);
+        newAction().moveToElement(footer);
         return new ResultsPageGoogle(driver);
     }
 
-    public ResultsPageRozetka chooseSeller(){
+    public ResultsPageRozetka chooseSellerRozetka(){
         rozetkaSeller.click();
         waitForVisibility(catalogSettings);
-
         return this;
     }
 
@@ -58,70 +57,32 @@ public class ResultsPageRozetka extends BasePage {
         return new ProductPageRozetka(driver);
     }
 
-    public ResultsPageRozetka settingsSort(String value){
+    public void settingsSort(String value){
         sort.click();
         WebElement listBox = driver.findElement(By.xpath("//select"));
         Select select = new Select(listBox);
-        select.selectByValue(value);
-        this.sleep(1);
-        return this;
-    }
-
-    public void checkPricesAsc() {
-        List<WebElement> pricesList = driver.findElements(By.xpath(prices));
-        int[] arr = integerValues(pricesList);
-        for(int i = 0; i<arr.length-1; i++){
-            if(!(arr[i]<=arr[i+1])) {
-                try {
-                    throw new Exception("Not ascending!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        try {
+            select.selectByValue(value);
+            waitForClickable(catalog);
+        }
+        catch (StaleElementReferenceException e){
+            e.printStackTrace();
         }
     }
 
-    public void checkPricesDesc()  {
-        List<WebElement> pricesList = driver.findElements(By.xpath(prices));
-        int[] arr = integerValues(pricesList);
-        for(int i = 0; i<arr.length-1; i++){
-            if(!(arr[i]>=arr[i+1])) {
-                try {
-                    throw new Exception("Not descending!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public List<WebElement> getPrices() {
+        return driver.findElements(By.xpath(prices));
     }
 
-    public void checkNovelty(){
-        if(!novelty.isDisplayed()){
-            try {
-                throw new Exception("No new products!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public WebElement getNovelty(){
+        return novelty;
     }
 
-    public void checkPopularity(){
-        if(!popularity.isDisplayed()){
-            try {
-                throw new Exception("No popular products!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public WebElement getPopularity(){
+        return popularity;
     }
 
-    public void checkAction(){
-        if(!action.isDisplayed()){
-            try {
-                throw new Exception("No action products!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public WebElement getAction(){
+        return action;
     }
 }

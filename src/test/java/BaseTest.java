@@ -31,10 +31,10 @@ public class BaseTest {
     }
 
     @BeforeMethod(dependsOnMethods = "setUp")
-    public void openRozetkaFromGoogle(){
+    public void openRozetkaFromGoogle() {
         HomePageGoogle homePageGoogle = new HomePageGoogle(driver);
         homePageGoogle
-                .goToResultsPage()
+                .toGoogleRozetka()
                 .clickFirstResult();
     }
 
@@ -43,11 +43,13 @@ public class BaseTest {
         if (!result.isSuccess()) {
             try {
                 File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                copyFile(scrFile, new File(result.getName() +"["+ LocalDate.now() + "][" + System.currentTimeMillis() + "].png"));
+                copyFile(scrFile, new File(result.getName() + "[" + LocalDate.now() + "][" + System.currentTimeMillis() + "].png"));
 
             } catch (
                     IOException e) {
                 e.printStackTrace();
+            } finally {
+                driver.quit();
             }
         }
         driver.quit();
