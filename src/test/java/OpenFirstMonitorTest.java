@@ -8,6 +8,6 @@ public class OpenFirstMonitorTest extends BaseTest {
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka.chooseMonitorFromCatalog()
                 .chooseSellerRozetka()
-                .goToProductPage();
+                .openFirstProductPage();
     }
 }

@@ -9,7 +9,7 @@ public class AddingToCartTest extends BaseTest {
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka.goToResultsPage();
         ResultsPageRozetka resultsPageRozetka = new ResultsPageRozetka(driver);
-        resultsPageRozetka.goToProductPage()
+        resultsPageRozetka.openFirstProductPage()
                 .clickToCheckout();
     }
 }

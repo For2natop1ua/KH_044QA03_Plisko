@@ -51,7 +51,7 @@ public class ResultsPageRozetka extends BasePage {
         return this;
     }
 
-    public ProductPageRozetka goToProductPage() {
+    public ProductPageRozetka openFirstProductPage() {
         List<WebElement> results = driver.findElements(searchResults);
         results.get(0).click();
         return new ProductPageRozetka(driver);
