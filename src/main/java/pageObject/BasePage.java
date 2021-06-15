@@ -8,13 +8,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage {
 
     protected WebDriver driver;
-    WebDriverWait pageLoading = new WebDriverWait(driver, 5);
+    public WebDriverWait pageLoading(){
+        return new WebDriverWait(driver, 5);
+    }
 
     public void waitForClickable(WebElement element) {
-        pageLoading.until(ExpectedConditions.elementToBeClickable(element));
+        pageLoading().until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void waitForVisibility(WebElement element) {
-        pageLoading.until(ExpectedConditions.visibilityOf(element));
+        pageLoading().until(ExpectedConditions.visibilityOf(element));
     }
 }
