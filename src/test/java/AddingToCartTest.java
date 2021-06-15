@@ -5,7 +5,7 @@ import pageObject.ResultsPageRozetka;
 public class AddingToCartTest extends BaseTest {
 
     @Test
-    public void addProductToCart() {
+    public void addBookToCart() {
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka.goToResultsPage();
         ResultsPageRozetka resultsPageRozetka = new ResultsPageRozetka(driver);
