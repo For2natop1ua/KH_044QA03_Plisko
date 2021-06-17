@@ -34,7 +34,7 @@ public class BaseTest {
     public void openRozetkaFromGoogle(){
         HomePageGoogle homePageGoogle = new HomePageGoogle(driver);
         homePageGoogle
-                .toGoogleRozetka()
+                .search("rozetka")
                 .clickFirstResult();
     }
 

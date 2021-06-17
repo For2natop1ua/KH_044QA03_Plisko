@@ -26,9 +26,9 @@ public class HomePageRozetka extends BasePage {
         return new ResultsPageRozetka(driver);
     }
 
-    public ResultsPageRozetka goToResultsPage() {
+    public ResultsPageRozetka searchProduct(String input) {
         searchFieldRozetka.clear();
-        searchFieldRozetka.sendKeys("book");
+        searchFieldRozetka.sendKeys(input);
         searchButtonSubmit.click();
         return new ResultsPageRozetka(driver);
     }

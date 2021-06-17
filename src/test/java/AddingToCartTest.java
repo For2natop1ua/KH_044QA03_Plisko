@@ -7,7 +7,7 @@ public class AddingToCartTest extends BaseTest {
     @Test
     public void addProductToCart() {
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
-        homePageRozetka.goToResultsPage();
+        homePageRozetka.searchProduct("book");
         ResultsPageRozetka resultsPageRozetka = new ResultsPageRozetka(driver);
         resultsPageRozetka.openFirstProductPage()
                 .clickToCheckout();
