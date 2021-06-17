@@ -15,9 +15,9 @@ public class HomePageGoogle extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public ResultsPageGoogle toGoogleRozetka() {
+    public ResultsPageGoogle search(String input) {
         searchField.clear();
-        searchField.sendKeys("rozetka");
+        searchField.sendKeys(input);
         searchField.submit();
         return new ResultsPageGoogle(driver);
     }

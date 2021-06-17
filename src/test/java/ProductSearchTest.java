@@ -11,7 +11,7 @@ public class ProductSearchTest extends BaseTest {
 
         HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
         homePageRozetka
-                .goToResultsPage()
+                .searchProduct("book")
                 .moveToFooter();
     }
 }
