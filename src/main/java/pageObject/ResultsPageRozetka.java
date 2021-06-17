@@ -1,10 +1,12 @@
 package pageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -25,6 +27,17 @@ public class ResultsPageRozetka extends BasePage {
     private WebElement maxPrice;
     @FindBy(css = ".button.slider-filter__button")
     private WebElement buttonPriceOk;
+    @FindBy(css = ".catalog-settings__sorting")
+    private WebElement sort;
+    @FindBy(css = ".promo-label_type_novelty")
+    private WebElement novelty;
+    @FindBy(css = ".promo-label_type_popularity")
+    private WebElement popularity;
+    @FindBy(css = ".promo-label_type_action")
+    private WebElement action;
+    @FindBy (css = ".catalog-grid.ng-star-inserted")
+    private WebElement catalog;
+    String prices = "//span[@class='goods-tile__price-value']";
 
 
     public ResultsPageRozetka(WebDriver driver) {
@@ -54,10 +67,53 @@ public class ResultsPageRozetka extends BasePage {
         return buttonPriceOk;
     }
 
+    public List<WebElement> getPrices() {
+        return driver.findElements(By.xpath(prices));
+    }
+
+    public WebElement getNovelty(){
+        return novelty;
+    }
+
+    public WebElement getPopularity(){
+        return popularity;
+    }
+
+    public WebElement getAction(){
+        return action;
+    }
+
     public void inputFields(String min, String max){
         minPrice.clear();
         minPrice.sendKeys(min);
         maxPrice.clear();
         maxPrice.sendKeys(max);
+    }
+
+    public void settingsSort(String value){
+        sort.click();
+        WebElement listBox = driver.findElement(By.xpath("//select"));
+        Select select = new Select(listBox);
+        try {
+            waitForClickable(catalog);
+            select.selectByValue(value);
+            waitForClickable(catalog);
+        }
+        catch (StaleElementReferenceException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static int[] convertPricesToInt(List<WebElement> pricesList){
+        String[] str = new String[10];
+        int size = str.length;
+        for(int i = 0;i<size;i++){
+            str[i] = pricesList.get(i).getText().replace(" ", "");
+        }
+        int[] arr = new int [size];
+        for(int i =0; i<size; i++){
+            arr[i] = Integer.parseInt(str[i]);
+        }
+        return arr;
     }
 }
