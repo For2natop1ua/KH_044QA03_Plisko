@@ -30,7 +30,7 @@ public class HomePageRozetka extends BasePage {
 
     public ResultsPageRozetka searchProduct(String input) {
         searchFieldRozetka.clear();
-        searchFieldRozetka.sendKeys();
+        searchFieldRozetka.sendKeys(input);
         searchButtonSubmit.click();
         return new ResultsPageRozetka(driver);
     }

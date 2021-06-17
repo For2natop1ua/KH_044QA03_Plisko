@@ -26,14 +26,12 @@ public class RegisterPageRozetka extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
-    public RegisterPageRozetka incorrectAuth(String name, String surname, String phone, String email, String password){
+    public void incorrectAuth(String name, String surname, String phone, String email, String password){
         userName.sendKeys(name);
         userSurname.sendKeys(surname);
         userPhone.sendKeys(phone);
         userEmail.sendKeys(email);
         userPassword.sendKeys(password);
         Assert.assertTrue(validationMsg.isDisplayed());
-        return this;
     }
-
 }

@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import pageObject.HomePageGoogle;
+import pageObject.HomePageRozetka;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,13 @@ public class BaseTest {
         homePageGoogle
                 .search("rozetka")
                 .clickFirstResult();
+    }
+
+    @BeforeMethod(dependsOnMethods = "openRozetkaFromGoogle", groups = "sorting")
+    public void openProductPage(){
+        HomePageRozetka homePageRozetka = new HomePageRozetka(driver);
+        homePageRozetka
+                .chooseMonitorFromCatalog();
     }
 
     @AfterMethod(alwaysRun = true)
