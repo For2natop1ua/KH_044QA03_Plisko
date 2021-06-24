@@ -12,7 +12,8 @@ import java.util.List;
 
 public class ResultsPageRozetka extends BasePage {
 
-    By searchResults = By.cssSelector("a.goods-tile__picture");
+    @FindBy(css = "a.goods-tile__picture")
+    private By searchResults;
     @FindBy(xpath = "//a[@href='/monitors/c80089/seller=rozetka/']")
     private WebElement rozetkaSeller;
     @FindBy(css = "div.layout_with_sidebar")
@@ -35,10 +36,10 @@ public class ResultsPageRozetka extends BasePage {
     private WebElement popularity;
     @FindBy(css = ".promo-label_type_action")
     private WebElement action;
-    @FindBy (css = ".catalog-grid.ng-star-inserted")
+    @FindBy(css = ".catalog-grid.ng-star-inserted")
     private WebElement catalog;
-    String prices = "//span[@class='goods-tile__price-value']";
-
+    @FindBy(xpath = "//span[@class='goods-tile__price-value']")
+    private List<WebElement> pricesList;
 
     public ResultsPageRozetka(WebDriver driver) {
         this.driver = driver;
@@ -67,10 +68,6 @@ public class ResultsPageRozetka extends BasePage {
         return buttonPriceOk;
     }
 
-    public List<WebElement> getPrices() {
-        return driver.findElements(By.xpath(prices));
-    }
-
     public WebElement getNovelty(){
         return novelty;
     }
@@ -81,6 +78,20 @@ public class ResultsPageRozetka extends BasePage {
 
     public WebElement getAction(){
         return action;
+    }
+
+    public int[] getPrices() {
+        waitForRedrawn(pricesList.get(0));
+        String[] str = new String[10];
+        int size = str.length;
+        for(int i = 0;i<size;i++){
+            str[i] = pricesList.get(i).getText().replace(" ", "");
+        }
+        int[] pricesArr = new int [size];
+        for(int i =0; i<size; i++){
+            pricesArr[i] = Integer.parseInt(str[i]);
+        }
+        return pricesArr;
     }
 
     public void inputFields(String min, String max){
@@ -95,25 +106,10 @@ public class ResultsPageRozetka extends BasePage {
         WebElement listBox = driver.findElement(By.xpath("//select"));
         Select select = new Select(listBox);
         try {
-            waitForClickable(catalog);
             select.selectByValue(value);
-            waitForClickable(catalog);
         }
         catch (StaleElementReferenceException e){
             e.printStackTrace();
         }
-    }
-
-    public static int[] convertPricesToInt(List<WebElement> pricesList){
-        String[] str = new String[10];
-        int size = str.length;
-        for(int i = 0;i<size;i++){
-            str[i] = pricesList.get(i).getText().replace(" ", "");
-        }
-        int[] arr = new int [size];
-        for(int i =0; i<size; i++){
-            arr[i] = Integer.parseInt(str[i]);
-        }
-        return arr;
     }
 }

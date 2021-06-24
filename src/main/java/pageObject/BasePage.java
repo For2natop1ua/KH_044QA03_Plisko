@@ -25,4 +25,8 @@ public class BasePage {
     public void waitForVisibility(WebElement element) {
         pageLoading().until(ExpectedConditions.visibilityOf(element));
     }
+
+    public void waitForRedrawn(WebElement element){
+        pageLoading().until(ExpectedConditions.stalenessOf(element));
+    }
 }
