@@ -23,12 +23,14 @@ public class HomePageRozetka extends BasePage {
         PageFactory.initElements(driver, this);
     }
     public ResultsPageRozetka chooseMonitorFromCatalog() {
+        BasePage.logger.info("Choosing monitor...");
         catalog.click();
         displaySection.click();
         return new ResultsPageRozetka(driver);
     }
 
     public ResultsPageRozetka searchProduct(String input) {
+        BasePage.logger.info("Searching product...");
         searchFieldRozetka.clear();
         searchFieldRozetka.sendKeys(input);
         searchButtonSubmit.click();
@@ -36,6 +38,7 @@ public class HomePageRozetka extends BasePage {
     }
 
     public LoginPageRozetka goToLoginPage(){
+        BasePage.logger.info("Going to Login page...");
         waitForClickable(authButton);
         authButton.click();
         return new LoginPageRozetka(driver);

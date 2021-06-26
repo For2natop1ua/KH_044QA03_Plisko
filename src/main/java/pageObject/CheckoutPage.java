@@ -12,6 +12,8 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        BasePage.logger.info("Going to Checkout page...");
         waitForClickable(acceptButton);
+        BasePage.logger.info("Success!");
     }
 }

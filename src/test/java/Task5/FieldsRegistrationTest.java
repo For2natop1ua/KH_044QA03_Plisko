@@ -10,6 +10,6 @@ public class FieldsRegistrationTest extends BaseTest{
         homePageRozetka
                 .goToLoginPage()
                 .goToRegister()
-                .incorrectAuth("Vasya", "Pupkin","wasd", "azr", "qwerty-azerty");
+                .formValidationAuth("Vasya", "Pupkin","wasd", "azr", "qwerty-azerty");
     }
 }

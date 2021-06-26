@@ -16,6 +16,7 @@ public class HomePageGoogle extends BasePage {
     }
 
     public ResultsPageGoogle search(String input) {
+        BasePage.logger.info("Googling...");
         searchField.clear();
         searchField.sendKeys(input);
         searchField.submit();

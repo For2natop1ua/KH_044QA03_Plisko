@@ -16,6 +16,7 @@ public class ResultsPageGoogle extends BasePage {
     }
 
     public HomePageRozetka clickFirstResult() {
+        BasePage.logger.info("Clicking first result...");
         List<WebElement> results = driver.findElements(searchResults);
         results.get(0).click();
         return new HomePageRozetka(driver);

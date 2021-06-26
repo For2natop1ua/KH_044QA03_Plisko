@@ -26,7 +26,7 @@ public class RegisterPageRozetka extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
-    public void incorrectAuth(String name, String surname, String phone, String email, String password){
+    public void formValidationAuth(String name, String surname, String phone, String email, String password){
         userName.sendKeys(name);
         userSurname.sendKeys(surname);
         userPhone.sendKeys(phone);
