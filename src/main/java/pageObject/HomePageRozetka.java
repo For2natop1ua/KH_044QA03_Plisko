@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 public class HomePageRozetka extends BasePage {
 
@@ -12,15 +11,24 @@ public class HomePageRozetka extends BasePage {
     private WebElement searchFieldRozetka;
     @FindBy(css = "button.search-form__submit")
     private WebElement searchButtonSubmit;
+    @FindBy(css = "button.menu__toggle")
+    private WebElement catalog;
+    @FindBy(xpath = "//a[@href='https://hard.rozetka.com.ua/monitors/c80089/']")
+    private WebElement displaySection;
 
     public HomePageRozetka(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    public ResultsPageRozetka chooseMonitorFromCatalog() {
+        catalog.click();
+        displaySection.click();
+        return new ResultsPageRozetka(driver);
+    }
 
-    public ResultsPageRozetka goToResultsPage() {
+    public ResultsPageRozetka searchProduct(String input) {
         searchFieldRozetka.clear();
-        searchFieldRozetka.sendKeys("book");
+        searchFieldRozetka.sendKeys(input);
         searchButtonSubmit.click();
         return new ResultsPageRozetka(driver);
     }
