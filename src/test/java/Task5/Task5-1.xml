@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Task5-1Test" >
+    <test name="Sorting" >
+        <groups>
+            <run>
+                <include name="sorting" />
+            </run>
+        </groups>
+        <packages>
+            <package name="Task5" />
+        </packages>
+        <classes>
+            <class name="Task5.PriceFieldValidationTest"/>
+        </classes>
+    </test>
+</suite>

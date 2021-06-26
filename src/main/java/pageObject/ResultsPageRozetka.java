@@ -3,7 +3,6 @@ package pageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,6 +19,13 @@ public class ResultsPageRozetka extends BasePage {
     private WebElement catalogSettings;
     @FindBy(css = "rz-lazy.app-footer")
     private WebElement footer;
+    @FindBy(xpath = "//input[@formcontrolname = 'min']")
+    private WebElement minPrice;
+    @FindBy(xpath = "//input[@formcontrolname = 'max']")
+    private WebElement maxPrice;
+    @FindBy(css = ".button.slider-filter__button")
+    private WebElement buttonPriceOk;
+
 
     public ResultsPageRozetka(WebDriver driver) {
         this.driver = driver;
@@ -28,8 +34,7 @@ public class ResultsPageRozetka extends BasePage {
     }
 
     public ResultsPageGoogle moveToFooter() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(footer);
+        newAction().moveToElement(footer);
         return new ResultsPageGoogle(driver);
     }
 
@@ -43,5 +48,16 @@ public class ResultsPageRozetka extends BasePage {
         List<WebElement> results = driver.findElements(searchResults);
         results.get(0).click();
         return new ProductPageRozetka(driver);
+    }
+
+    public WebElement getButtonPriceOk(){
+        return buttonPriceOk;
+    }
+
+    public void inputFields(String min, String max){
+        minPrice.clear();
+        minPrice.sendKeys(min);
+        maxPrice.clear();
+        maxPrice.sendKeys(max);
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Task5-AllTests" >
+    <test name="Registration" >
+        <groups>
+            <run>
+                <include name="registration" />
+            </run>
+        </groups>
+        <packages>
+            <package name="Task5" />
+        </packages>
+        <classes>
+            <class name="Task5.FieldsRegistrationTest"/>
+        </classes>
+    </test>
+
+    <test name="Sorting" >
+        <groups>
+            <run>
+                <include name="sorting" />
+            </run>
+        </groups>
+        <packages>
+            <package name="Task5" />
+        </packages>
+        <classes>
+            <class name="Task5.PriceFieldValidationTest"/>
+        </classes>
+    </test>
+</suite>
